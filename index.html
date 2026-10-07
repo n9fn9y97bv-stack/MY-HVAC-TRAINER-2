@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b5d75" />
+  <title>My HVAC Trainer</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>My HVAC Trainer</h1>
+      <p>Version 1 • Personal learning app</p>
+    </div>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <nav class="bottom-nav">
+    <button data-page="home" class="active">🏠<span>Home</span></button>
+    <button data-page="learn">📚<span>Learn</span></button>
+    <button data-page="quiz">✅<span>Quiz</span></button>
+    <button data-page="tools">🧮<span>Tools</span></button>
+    <button data-page="notes">📝<span>Notes</span></button>
+  </nav>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="hero card">
+        <div>
+          <span class="badge">Beginner Friendly</span>
+          <h2>Learn HVAC step by step</h2>
+          <p>Study the refrigeration cycle, electrical controls, airflow, heating, tools, safety, and troubleshooting.</p>
+          <button class="primary jump" data-page="learn">Start learning</button>
+        </div>
+        <div class="mini-cycle">
+          <div>Compressor</div><span>→</span><div>Condenser</div><span>→</span><div>Metering Device</div><span>→</span><div>Evaporator</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="card"><strong id="completedCount">0</strong><span>Lessons done</span></div>
+        <div class="card"><strong id="bestScore">0%</strong><span>Best quiz</span></div>
+        <div class="card"><strong id="noteCount">0</strong><span>Saved notes</span></div>
+      </div>
+
+      <div class="card safety">
+        <h3>⚠️ Safety comes first</h3>
+        <p>HVAC work may involve lethal voltage, pressurized refrigerant, combustion gases, rotating equipment, sharp metal, and high temperatures. Never bypass a safety control. Follow lockout/tagout, manufacturer instructions, EPA rules, and local codes.</p>
+      </div>
+
+      <div class="card">
+        <h3>Version 1 includes</h3>
+        <ul class="clean-list">
+          <li>Eight core HVAC lessons</li>
+          <li>Built-in diagrams and pictures</li>
+          <li>Practice quiz</li>
+          <li>Ohm’s Law, superheat, subcooling, and airflow calculators</li>
+          <li>Personal notes and saved progress</li>
+          <li>Offline use after first opening</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="learn" class="page">
+      <div class="section-head">
+        <div><h2>Lessons</h2><p>Tap a lesson to open it.</p></div>
+        <input id="lessonSearch" type="search" placeholder="Search lessons" />
+      </div>
+      <div id="lessonGrid" class="grid"></div>
+    </section>
+
+    <section id="lessonView" class="page">
+      <button id="backToLessons" class="text-btn">← Back to lessons</button>
+      <article id="lessonContent" class="card lesson-content"></article>
+    </section>
+
+    <section id="quiz" class="page">
+      <div class="card quiz-card">
+        <h2>HVAC Practice Quiz</h2>
+        <div id="quizContent"></div>
+      </div>
+    </section>
+
+    <section id="tools" class="page">
+      <div class="section-head"><div><h2>HVAC Calculators</h2><p>Use these for practice and field reference.</p></div></div>
+
+      <div class="tool-grid">
+        <div class="card calculator">
+          <h3>Ohm’s Law</h3>
+          <p>Enter any two values.</p>
+          <label>Voltage (V)<input id="voltage" type="number" step="any"></label>
+          <label>Current (A)<input id="current" type="number" step="any"></label>
+          <label>Resistance (Ω)<input id="resistance" type="number" step="any"></label>
+          <button onclick="calcOhms()">Calculate</button>
+          <div id="ohmsResult" class="result"></div>
+        </div>
+
+        <div class="card calculator">
+          <h3>Superheat</h3>
+          <label>Suction line temperature (°F)<input id="suctionTemp" type="number" step="any"></label>
+          <label>Saturation temperature (°F)<input id="evapSat" type="number" step="any"></label>
+          <button onclick="calcSuperheat()">Calculate</button>
+          <div id="superheatResult" class="result"></div>
+        </div>
+
+        <div class="card calculator">
+          <h3>Subcooling</h3>
+          <label>Condensing saturation temperature (°F)<input id="condSat" type="number" step="any"></label>
+          <label>Liquid line temperature (°F)<input id="liquidTemp" type="number" step="any"></label>
+          <button onclick="calcSubcooling()">Calculate</button>
+          <div id="subcoolResult" class="result"></div>
+        </div>
+
+        <div class="card calculator">
+          <h3>Airflow Estimate</h3>
+          <p>Rule-of-thumb only: approximately 400 CFM per ton.</p>
+          <label>System size (tons)<input id="tons" type="number" step="any"></label>
+          <button onclick="calcAirflow()">Calculate</button>
+          <div id="airflowResult" class="result"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="notes" class="page">
+      <div class="card notes-card">
+        <h2>My HVAC Notes</h2>
+        <input id="noteTitle" placeholder="Note title" />
+        <textarea id="noteBody" placeholder="Write what you learned, readings, model numbers, or reminders..."></textarea>
+        <button id="saveNote" class="primary">Save note</button>
+      </div>
+      <div id="notesList"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

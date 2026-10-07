@@ -1,0 +1,9 @@
+{
+  "name": "My HVAC Trainer",
+  "short_name": "HVAC Trainer",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#edf3f6",
+  "theme_color": "#0b5d75",
+  "icons": []
+}
